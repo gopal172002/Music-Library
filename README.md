@@ -1,54 +1,104 @@
-# React + TypeScript + Vite
+# Music App - Main App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a music application built using React and Micro Frontend Architecture. The application consists of two parts:
+1. Main App (Host) - Contains the authentication and container logic
+2. Music Library (Remote) - A micro frontend that handles the music library functionality
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Clean and modern UI for displaying music library
+- Filter, sort, and group by features for Album, Artist, and Title
+- Role-based authentication (admin/user)
+- Micro Frontend Architecture using Module Federation
+- Responsive design using Material-UI
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js (v16 or higher)
+- npm or yarn
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Running Locally
+
+1. Clone repositories:
+```
+https://github.com/gopal172002/Music-Library.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
+cd Music-Library
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start application:
+```bash
+npm run build
+```
+```bash
+npm run preview
+```
+
+The application will be available at:
+- Music Library: http://localhost:5174
+
+## Demo Credentials
+
+Two user roles are available for testing:
+
+1. Admin User
+   - Username: admin
+   - Password: admin123
+   - Can add and delete songs
+
+2. Regular User
+   - Username: user
+   - Password: user123
+   - Can only view and filter songs
+
+## Architecture
+
+### Micro Frontend Architecture
+
+The application uses Module Federation to split the codebase into two parts:
+
+1. Main App (Host)
+   - Handles authentication and routing
+   - Contains the container logic
+   - Dynamically loads the Music Library micro frontend
+
+2. Music Library (Remote)
+   - Implements the music library functionality
+   - Exposes components to the host application
+   - Handles song management features
+
+### Authentication
+
+- Uses a simple in-memory JWT approach
+- Tokens are stored in localStorage
+- Role-based access control for different features
+
+## Deployment
+
+The application is deployed on Vercel:
+
+- **Main App (Host):** [https://music-app-main-host-djo6.vercel.app/](https://music-app-main-host-djo6.vercel.app/)
+- **Music Library (Remote):** [https://music-library-chi.vercel.app/](https://music-library-chi.vercel.app/)
+
+### Deployment Process
+
+1. Push changes to the main branch
+2. Vercel automatically builds and deploys both applications
+3. The main app is configured to load the music library from its deployment URL
+
+## Technologies Used
+
+- React 18
+- TypeScript
+- Vite
+- Module Federation
+- Material-UI
+- React Router
+- JWT for authentication
