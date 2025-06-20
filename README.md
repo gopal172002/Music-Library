@@ -1,4 +1,4 @@
-# Music App - Main App
+# Music Library
 
 This is a music application built using React and Micro Frontend Architecture. The application consists of two parts:
 1. Main App (Host) - Contains the authentication and container logic
